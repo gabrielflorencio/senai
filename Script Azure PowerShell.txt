@@ -1,0 +1,40 @@
+Listar conta Azure:
+az account list --output table
+
+Listar Localizações do Azure:
+az account list-locations --output table
+
+Criação grupo de recursos:
+az group create --name mypool --location brazilsouth
+
+Listar grupo de recursos:
+az group show --name mypool --output table
+
+Listar tamanhos de disco:
+az vm list-sizes --location brazilsouth --output table
+
+Listar tipos de imagem:
+az vm image list --output table
+
+Criação máquina virtual Ubuntu:
+az vm create -g mypool -n myvm --image UbuntuLTS --location brazilsouth --size Standard_B1ls --admin-username senai --generate-ssh-keys
+
+Listar máquinas virtuais:
+az vm list --output table
+
+Verificação de execução de VM:
+az vm get-instance-view --name myvm --resource-group mypool --output table
+
+Consulta documentação em relação ao termo pesquisado:
+az find Ubuntu
+
+Configura o Nginx por meio de script:
+az vm extension set --resource-group mypool --vm-name myvm --name customScript --publisher Microsoft.Azure.Extensions --settings "{'fileUris':['https://raw.githubusercontent.com/MicrosoftDocs/mslearn-welcome-to-azure/master/configure-nginx.sh']}" --protected-settings "{'commandToExecute': './configure-nginx.sh'}"
+
+Liberar porta 80 no Firewall:
+az vm open-port --resource-group mypool --name myvm --port 80
+
+Listar Endereço IP Público de VM específica
+az vm show --resource-group mypool --name myvm --show-details --query [publicIps] --output tsv
+
+Acessar o endereço IP público listado pelo navegador.
